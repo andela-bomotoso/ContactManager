@@ -1,0 +1,103 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.bukola_omotoso.contactmanager.EditAddFragment">
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="vertical">
+
+      <android.support.design.widget.TextInputLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:id="@+id/fNameTextInput">
+          <EditText
+              android:layout_height="match_parent"
+              android:layout_width="match_parent"
+              android:hint="@string/first_name"
+              android:inputType="textPersonName|textCapWords"
+              android:imeOptions="actionNext"/>
+
+      </android.support.design.widget.TextInputLayout>
+
+
+      <android.support.design.widget.TextInputLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:id="@+id/lNameTextInput">
+          <EditText
+              android:layout_height="match_parent"
+              android:layout_width="match_parent"
+              android:hint="@string/last_name"
+              android:inputType="textPersonName|textCapWords"
+              android:imeOptions="actionNext"/>
+
+      </android.support.design.widget.TextInputLayout>
+
+      <android.support.design.widget.TextInputLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:id="@+id/phoneTextInput">
+          <EditText
+              android:layout_height="match_parent"
+              android:layout_width="match_parent"
+              android:hint="@string/phone"
+              android:inputType="phone"
+              android:imeOptions="actionNext"/>
+
+      </android.support.design.widget.TextInputLayout>
+
+      <android.support.design.widget.TextInputLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:id="@+id/birthdayTextInput">
+          <EditText
+              android:layout_height="match_parent"
+              android:layout_width="match_parent"
+              android:hint="@string/birthday"
+              android:inputType="date"
+              android:imeOptions="actionNext"/>
+
+      </android.support.design.widget.TextInputLayout>
+
+      <android.support.design.widget.TextInputLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:id="@+id/addressTextInput">
+          <EditText
+              android:layout_height="match_parent"
+              android:layout_width="match_parent"
+              android:hint="@string/address"
+              android:inputType="textPostalAddress|textCapWords"
+              android:imeOptions="actionNext"/>
+
+      </android.support.design.widget.TextInputLayout>
+
+      <android.support.design.widget.TextInputLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:id="@+id/zipTextInput">
+          <EditText
+              android:layout_height="match_parent"
+              android:layout_width="match_parent"
+              android:hint="@string/zip_code"
+              android:inputType="number"
+              android:imeOptions="actionDone"/>
+
+      </android.support.design.widget.TextInputLayout>
+
+      <android.support.design.widget.FloatingActionButton
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="bottom|end"
+          android:layout_margin="@dimen/fab_margin"
+          android:id="@+id/saveFloatingActionButton"
+          android:src="@drawable/ic_check_black_24dp"
+          />
+
+
+  </LinearLayout>
+
+</ScrollView>
