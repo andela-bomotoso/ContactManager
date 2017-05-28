@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:columnCount="2"
-    tools:context="com.example.bukola_omotoso.contactmanager.ContactDetailsFragment">
+    tools:context="com.example.bukola_omotoso.contactmanager.fragments.ContactDetailsFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView

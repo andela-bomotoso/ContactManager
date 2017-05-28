@@ -1,4 +1,4 @@
-package com.example.bukola_omotoso.contactmanager;
+package com.example.bukola_omotoso.contactmanager.fragments;
 
 
 import android.app.DatePickerDialog;
@@ -28,6 +28,8 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
+import com.example.bukola_omotoso.contactmanager.MainActivity;
+import com.example.bukola_omotoso.contactmanager.R;
 import com.example.bukola_omotoso.contactmanager.data.DatabaseDescription;
 
 import java.text.SimpleDateFormat;

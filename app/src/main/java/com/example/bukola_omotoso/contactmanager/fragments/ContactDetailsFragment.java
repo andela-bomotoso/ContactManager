@@ -1,4 +1,4 @@
-package com.example.bukola_omotoso.contactmanager;
+package com.example.bukola_omotoso.contactmanager.fragments;
 
 
 import android.app.ActionBar;
@@ -27,6 +27,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.bukola_omotoso.contactmanager.MainActivity;
+import com.example.bukola_omotoso.contactmanager.R;
 import com.example.bukola_omotoso.contactmanager.data.DatabaseDescription;
 
 /**
