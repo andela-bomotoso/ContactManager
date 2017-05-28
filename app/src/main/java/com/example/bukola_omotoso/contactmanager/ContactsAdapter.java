@@ -3,6 +3,7 @@ package com.example.bukola_omotoso.contactmanager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,8 +60,9 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         cursor.moveToPosition(position);
+        Log.d("cursor", cursor.toString());
         holder.setRowID(cursor.getLong(cursor.getColumnIndex(DatabaseDescription.Contact._ID)));
-        holder.textView.setText(cursor.getString(cursor.getColumnIndex(DatabaseDescription.Contact.COLUMN_FIRSTNAME+" " + DatabaseDescription.Contact.COLUMN_LASTNAME)));
+        holder.textView.setText(cursor.getString(cursor.getColumnIndex(DatabaseDescription.Contact.COLUMN_FIRSTNAME))+" " + cursor.getString(cursor.getColumnIndex(DatabaseDescription.Contact.COLUMN_LASTNAME)));
     }
 
     @Override
@@ -71,5 +73,9 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
     public void swapCursor(Cursor cursor)   {
         this.cursor = cursor;
         notifyDataSetChanged();
+    }
+
+    public int getCursorCount() {
+        return (cursor != null) ? cursor.getCount() : 0;
     }
 }
