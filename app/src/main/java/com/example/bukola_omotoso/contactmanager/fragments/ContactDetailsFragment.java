@@ -37,8 +37,8 @@ import com.example.bukola_omotoso.contactmanager.data.DatabaseDescription;
 public class ContactDetailsFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>{
 
     private  static final  int CONTACT_LOADER = 0;
-    private  static ContactDetailsFragmentListener contactDetailsFragmentListener;
     private static Uri contactUri;
+    private  static ContactDetailsFragmentListener contactDetailsFragmentListener;
 
     private TextView nameTextView;
     private TextView phoneTextView;
@@ -50,7 +50,6 @@ public class ContactDetailsFragment extends Fragment implements LoaderManager.Lo
 
 
     public ContactDetailsFragment() {
-        // Required empty public constructor
     }
 
     public interface ContactDetailsFragmentListener {

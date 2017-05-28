@@ -27,6 +27,10 @@ import com.example.bukola_omotoso.contactmanager.data.DatabaseDescription;
  */
 public class ContactFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>{
 
+    private static final int CONTACTS_LOADER = 0;
+    private ContactFragmentListener contactFragmentListener;
+    private ContactsAdapter contactsAdapter;
+
     public ContactFragment() {
     }
 
@@ -35,12 +39,6 @@ public class ContactFragment extends Fragment implements LoaderManager.LoaderCal
         void onContactAdded();
     }
 
-    private CoordinatorLayout coordinatorLayout;
-    private static final int CONTACTS_LOADER = 0;
-    private ContactFragmentListener contactFragmentListener;
-    private ContactsAdapter contactsAdapter;
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
@@ -48,7 +46,6 @@ public class ContactFragment extends Fragment implements LoaderManager.LoaderCal
         setHasOptionsMenu(true);
 
         View view = inflater.inflate(R.layout.fragment_contacts, container, false);
-        coordinatorLayout = (CoordinatorLayout)getActivity().findViewById(R.id.fragmentContainer);
         RecyclerView recyclerView;
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getBaseContext()));

@@ -109,8 +109,6 @@ public class EditAddFragment extends Fragment implements LoaderManager.LoaderCal
 
         fNameTextInputLayout = (TextInputLayout) view.findViewById(R.id.fNameTextInput);
         lNameTextInputLayout = (TextInputLayout) view.findViewById(R.id.lNameTextInput);
-        fNameTextInputLayout.getEditText().addTextChangedListener(nameChangedListener);
-        lNameTextInputLayout.getEditText().addTextChangedListener(nameChangedListener);
 
         phoneTextInputLayout = (TextInputLayout)view.findViewById(R.id.phoneTextInput);
         birthdayTextInputLayout = (TextInputLayout)view.findViewById(R.id.birthdayTextInput);
@@ -154,34 +152,6 @@ public class EditAddFragment extends Fragment implements LoaderManager.LoaderCal
         birthdayTextInputLayout.getEditText().setText(sdf.format(calendar.getTime()));
     }
 
-    private final TextWatcher nameChangedListener = new TextWatcher() {
-        @Override
-        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-        }
-
-        @Override
-        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            //updateSaveButtonFAB();
-        }
-
-        @Override
-        public void afterTextChanged(Editable editable) {
-
-        }
-    };
-
-    private void updateSaveButtonFAB()  {
-        String fname = fNameTextInputLayout.getEditText().getText().toString();
-        String lname= lNameTextInputLayout.getEditText().getText().toString();
-
-        if(fname.trim().length() != 0  || lname.trim().length() != 0)   {
-            saveContactFAB.show();
-        }   else    {
-            saveContactFAB.hide();
-        }
-    }
-
     private final View.OnClickListener saveContactButtonClick =
             new View.OnClickListener() {
                 @Override
@@ -190,7 +160,6 @@ public class EditAddFragment extends Fragment implements LoaderManager.LoaderCal
                     saveContact();
                 }
             };
-
 
             private void saveContact()  {
                 ContentValues contentValues = new ContentValues();
@@ -206,7 +175,6 @@ public class EditAddFragment extends Fragment implements LoaderManager.LoaderCal
                         addressTextInputLayout.getEditText().getText().toString());
                 contentValues.put(DatabaseDescription.Contact.COLUMN_ZIP,
                         zipTextInputLayout.getEditText().getText().toString());
-
                 if(newContact) {
                     if (!fNameTextInputLayout.getEditText().getText().toString().isEmpty() || ! lNameTextInputLayout.getEditText().getText().toString().isEmpty()) {
                         Uri newContactUri = getActivity().getContentResolver().insert(DatabaseDescription.Contact.CONTENT_URI, contentValues);
@@ -259,8 +227,6 @@ public class EditAddFragment extends Fragment implements LoaderManager.LoaderCal
             birthdayTextInputLayout.getEditText().setText(data.getString(birthdayIndex));
             addressTextInputLayout.getEditText().setText(data.getString(addressIndex));
             zipTextInputLayout.getEditText().setText(data.getString(zipIndex));
-
-           // updateSaveButtonFAB();
         }
     }
 
