@@ -3,7 +3,9 @@ package com.example.bukola_omotoso.contactmanager;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
@@ -31,6 +33,7 @@ public class ContactFragment extends Fragment implements LoaderManager.LoaderCal
         void onContactAdded();
     }
 
+    private CoordinatorLayout coordinatorLayout;
     private static final int CONTACTS_LOADER = 0;
     private ContactFragmentListener contactFragmentListener;
     private ContactsAdapter contactsAdapter;
@@ -43,6 +46,7 @@ public class ContactFragment extends Fragment implements LoaderManager.LoaderCal
         setHasOptionsMenu(true);
 
         View view = inflater.inflate(R.layout.fragment_contacts, container, false);
+        coordinatorLayout = (CoordinatorLayout)getActivity().findViewById(R.id.fragmentContainer);
         RecyclerView recyclerView;
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getBaseContext()));
