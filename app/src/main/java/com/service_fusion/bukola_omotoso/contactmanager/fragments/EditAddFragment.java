@@ -123,7 +123,6 @@ public class EditAddFragment extends Fragment implements LoaderManager.LoaderCal
         saveContactFAB = (FloatingActionButton) view.findViewById(R.id.saveFloatingActionButton);
 
         saveContactFAB.setOnClickListener(saveContactButtonClick);
-        //updateSaveButtonFAB();
         coordinatorLayout = (CoordinatorLayout) getActivity().findViewById(R.id.fragmentContainer);
 
         Bundle arguments = getArguments();
@@ -185,13 +184,18 @@ public class EditAddFragment extends Fragment implements LoaderManager.LoaderCal
                 Snackbar.make(coordinatorLayout, R.string.invalid_contact, Snackbar.LENGTH_LONG).show();
             }
         } else {
-            int updatedRows = getActivity().getContentResolver().update(contactUri, contentValues, null, null);
+            if (!fNameTextInputLayout.getEditText().getText().toString().isEmpty() || !lNameTextInputLayout.getEditText().getText().toString().isEmpty()) {
 
-            if (updatedRows > 0) {
-                editAddFragmentListener.onEditAddCompleted(contactUri);
-                Snackbar.make(coordinatorLayout, R.string.contact_updated, Snackbar.LENGTH_LONG).show();
-            } else {
-                Snackbar.make(coordinatorLayout, R.string.contact_not_updated, Snackbar.LENGTH_LONG).show();
+                int updatedRows = getActivity().getContentResolver().update(contactUri, contentValues, null, null);
+
+                if (updatedRows > 0) {
+                    editAddFragmentListener.onEditAddCompleted(contactUri);
+                    Snackbar.make(coordinatorLayout, R.string.contact_updated, Snackbar.LENGTH_LONG).show();
+                } else {
+                    Snackbar.make(coordinatorLayout, R.string.contact_not_updated, Snackbar.LENGTH_LONG).show();
+                }
+            }else {
+                Snackbar.make(coordinatorLayout, R.string.invalid_contact, Snackbar.LENGTH_LONG).show();
             }
         }
     }
