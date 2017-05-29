@@ -60,15 +60,14 @@ public class EditAddFragment extends Fragment implements LoaderManager.LoaderCal
     private CoordinatorLayout coordinatorLayout;
 
 
-
     @Override
-    public void onAttach(Context context)   {
+    public void onAttach(Context context) {
         super.onAttach(context);
         editAddFragmentListener = (EditAddFragmentListener) context;
     }
 
     @Override
-    public void onDetach()  {
+    public void onDetach() {
         super.onDetach();
         editAddFragmentListener = null;
     }
@@ -83,8 +82,8 @@ public class EditAddFragment extends Fragment implements LoaderManager.LoaderCal
 
     }
 
-    public interface EditAddFragmentListener    {
-        void  onEditAddCompleted(Uri contactUri);
+    public interface EditAddFragmentListener {
+        void onEditAddCompleted(Uri contactUri);
     }
 
 
@@ -92,7 +91,7 @@ public class EditAddFragment extends Fragment implements LoaderManager.LoaderCal
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_edit_add, container,false);
+        View view = inflater.inflate(R.layout.fragment_edit_add, container, false);
 
         final DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -107,9 +106,9 @@ public class EditAddFragment extends Fragment implements LoaderManager.LoaderCal
         fNameTextInputLayout = (TextInputLayout) view.findViewById(R.id.fNameTextInput);
         lNameTextInputLayout = (TextInputLayout) view.findViewById(R.id.lNameTextInput);
 
-        phoneTextInputLayout = (TextInputLayout)view.findViewById(R.id.phoneTextInput);
-        birthdayTextInputLayout = (TextInputLayout)view.findViewById(R.id.birthdayTextInput);
-        addressTextInputLayout = (TextInputLayout)view.findViewById(R.id.addressTextInput);
+        phoneTextInputLayout = (TextInputLayout) view.findViewById(R.id.phoneTextInput);
+        birthdayTextInputLayout = (TextInputLayout) view.findViewById(R.id.birthdayTextInput);
+        addressTextInputLayout = (TextInputLayout) view.findViewById(R.id.addressTextInput);
         zipTextInputLayout = (TextInputLayout) view.findViewById(R.id.zipTextInput);
 
         birthdayIcon = (ImageButton) view.findViewById(R.id.birthdayIcon);
@@ -117,7 +116,7 @@ public class EditAddFragment extends Fragment implements LoaderManager.LoaderCal
         birthdayIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new DatePickerDialog(getActivity(),dateSetListener, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
+                new DatePickerDialog(getActivity(), dateSetListener, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
 
             }
         });
@@ -125,16 +124,16 @@ public class EditAddFragment extends Fragment implements LoaderManager.LoaderCal
 
         saveContactFAB.setOnClickListener(saveContactButtonClick);
         //updateSaveButtonFAB();
-        coordinatorLayout = (CoordinatorLayout)getActivity().findViewById(R.id.fragmentContainer);
+        coordinatorLayout = (CoordinatorLayout) getActivity().findViewById(R.id.fragmentContainer);
 
         Bundle arguments = getArguments();
 
-        if (arguments != null)  {
+        if (arguments != null) {
             newContact = false;
             contactUri = arguments.getParcelable(MainActivity.CONTACT_URI);
         }
 
-        if(contactUri != null)  {
+        if (contactUri != null) {
             getLoaderManager().initLoader(CONTACT_LOADER, null, this);
         }
 
@@ -153,55 +152,55 @@ public class EditAddFragment extends Fragment implements LoaderManager.LoaderCal
             new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    ((InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(getView().getWindowToken(),0);
+                    ((InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(getView().getWindowToken(), 0);
                     saveContact();
                 }
             };
 
-            private void saveContact()  {
-                ContentValues contentValues = new ContentValues();
-                contentValues.put(DatabaseDescription.Contact.COLUMN_FIRSTNAME,
-                        fNameTextInputLayout.getEditText().getText().toString());
-                contentValues.put(DatabaseDescription.Contact.COLUMN_LASTNAME,
-                        lNameTextInputLayout.getEditText().getText().toString());
-                contentValues.put(DatabaseDescription.Contact.COLUMN_PHONE,
-                        phoneTextInputLayout.getEditText().getText().toString());
-                contentValues.put(DatabaseDescription.Contact.COLUMN_BIRTHDAY,
-                        birthdayTextInputLayout.getEditText().getText().toString());
-                contentValues.put(DatabaseDescription.Contact.COLUMN_ADDRESS,
-                        addressTextInputLayout.getEditText().getText().toString());
-                contentValues.put(DatabaseDescription.Contact.COLUMN_ZIP,
-                        zipTextInputLayout.getEditText().getText().toString());
-                if(newContact) {
-                    if (!fNameTextInputLayout.getEditText().getText().toString().isEmpty() || ! lNameTextInputLayout.getEditText().getText().toString().isEmpty()) {
-                        Uri newContactUri = getActivity().getContentResolver().insert(DatabaseDescription.Contact.CONTENT_URI, contentValues);
+    private void saveContact() {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(DatabaseDescription.Contact.COLUMN_FIRSTNAME,
+                fNameTextInputLayout.getEditText().getText().toString());
+        contentValues.put(DatabaseDescription.Contact.COLUMN_LASTNAME,
+                lNameTextInputLayout.getEditText().getText().toString());
+        contentValues.put(DatabaseDescription.Contact.COLUMN_PHONE,
+                phoneTextInputLayout.getEditText().getText().toString());
+        contentValues.put(DatabaseDescription.Contact.COLUMN_BIRTHDAY,
+                birthdayTextInputLayout.getEditText().getText().toString());
+        contentValues.put(DatabaseDescription.Contact.COLUMN_ADDRESS,
+                addressTextInputLayout.getEditText().getText().toString());
+        contentValues.put(DatabaseDescription.Contact.COLUMN_ZIP,
+                zipTextInputLayout.getEditText().getText().toString());
+        if (newContact) {
+            if (!fNameTextInputLayout.getEditText().getText().toString().isEmpty() || !lNameTextInputLayout.getEditText().getText().toString().isEmpty()) {
+                Uri newContactUri = getActivity().getContentResolver().insert(DatabaseDescription.Contact.CONTENT_URI, contentValues);
 
-                        if (newContactUri != null) {
-                            Snackbar.make(coordinatorLayout, R.string.contact_added, Snackbar.LENGTH_LONG).show();
-                            editAddFragmentListener.onEditAddCompleted(newContactUri);
-                        } else {
-                            Snackbar.make(coordinatorLayout, R.string.contact_not_added, Snackbar.LENGTH_LONG).show();
-                        }
-                    }   else    {
-                        Snackbar.make(coordinatorLayout, R.string.invalid_contact, Snackbar.LENGTH_LONG).show();
-                    }
-                } else    {
-                    int updatedRows = getActivity().getContentResolver().update(contactUri, contentValues, null, null);
-
-                    if(updatedRows > 0) {
-                        editAddFragmentListener.onEditAddCompleted(contactUri);
-                        Snackbar.make(coordinatorLayout, R.string.contact_updated,Snackbar.LENGTH_LONG).show();
-                    }   else    {
-                        Snackbar.make(coordinatorLayout, R.string.contact_not_updated, Snackbar.LENGTH_LONG).show();
-                    }
+                if (newContactUri != null) {
+                    Snackbar.make(coordinatorLayout, R.string.contact_added, Snackbar.LENGTH_LONG).show();
+                    editAddFragmentListener.onEditAddCompleted(newContactUri);
+                } else {
+                    Snackbar.make(coordinatorLayout, R.string.contact_not_added, Snackbar.LENGTH_LONG).show();
                 }
+            } else {
+                Snackbar.make(coordinatorLayout, R.string.invalid_contact, Snackbar.LENGTH_LONG).show();
             }
+        } else {
+            int updatedRows = getActivity().getContentResolver().update(contactUri, contentValues, null, null);
+
+            if (updatedRows > 0) {
+                editAddFragmentListener.onEditAddCompleted(contactUri);
+                Snackbar.make(coordinatorLayout, R.string.contact_updated, Snackbar.LENGTH_LONG).show();
+            } else {
+                Snackbar.make(coordinatorLayout, R.string.contact_not_updated, Snackbar.LENGTH_LONG).show();
+            }
+        }
+    }
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         switch (id) {
             case CONTACT_LOADER:
-                return  new CursorLoader(getActivity(), contactUri, null,
+                return new CursorLoader(getActivity(), contactUri, null,
                         null, null, null);
             default:
                 return null;

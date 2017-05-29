@@ -1,22 +1,27 @@
 package com.service_fusion.bukola_omotoso.contactmanager;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 
-import com.service_fusion.bukola_omotoso.contactmanager.R;
 import com.service_fusion.bukola_omotoso.contactmanager.fragments.ContactDetailsFragment;
 import com.service_fusion.bukola_omotoso.contactmanager.fragments.ContactFragment;
 import com.service_fusion.bukola_omotoso.contactmanager.fragments.EditAddFragment;
 
-public class MainActivity extends AppCompatActivity implements ContactFragment.ContactFragmentListener,EditAddFragment.EditAddFragmentListener, ContactDetailsFragment.ContactDetailsFragmentListener{
+public class MainActivity extends AppCompatActivity implements ContactFragment.ContactFragmentListener, EditAddFragment.EditAddFragmentListener, ContactDetailsFragment.ContactDetailsFragmentListener {
     public static final String CONTACT_URI = "contact_uri";
     private ContactFragment contactFragment;
+    private CoordinatorLayout coordinatorLayout;
+    SharedPreferences prefs = null;
 
-    private SharedPreferences sharedPreferences = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,12 +29,24 @@ public class MainActivity extends AppCompatActivity implements ContactFragment.C
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        //sharedPreferences = getSharedPreferences("")
+        coordinatorLayout = (CoordinatorLayout) findViewById(R.id.fragmentContainer);
+        prefs = getSharedPreferences(getString(R.string.preference_file_key), MODE_PRIVATE);
         contactFragment = new ContactFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            transaction.add(R.id.fragmentContainer, contactFragment);
-            transaction.commit();
+        transaction.add(R.id.fragmentContainer, contactFragment);
+        transaction.commit();
+
+        if (isFirstrun()) {
+            Snackbar.make(coordinatorLayout, R.string.first_run_message, Snackbar.LENGTH_LONG).show();
+            setFirstrun(false);
+        }
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d("Resume Entered", "RESUME MSG");
     }
 
     @Override
@@ -50,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements ContactFragment.C
 
     private void displayContact(Uri contactUri, int viewID) {
         ContactDetailsFragment detailsFragment = new ContactDetailsFragment();
-        Bundle arguments =  new Bundle();
+        Bundle arguments = new Bundle();
         arguments.putParcelable(CONTACT_URI, contactUri);
         detailsFragment.setArguments(arguments);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -62,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements ContactFragment.C
     private void displayEditAddFragment(int viewID, Uri contactUri) {
         EditAddFragment editAddFragment = new EditAddFragment();
 
-        if(contactUri != null)  {
+        if (contactUri != null) {
             Bundle arguments = new Bundle();
             arguments.putParcelable(CONTACT_URI, contactUri);
             editAddFragment.setArguments(arguments);
@@ -84,5 +101,15 @@ public class MainActivity extends AppCompatActivity implements ContactFragment.C
     @Override
     public void onEditContact(Uri contactUri) {
         displayEditAddFragment(R.id.fragmentContainer, contactUri);
+    }
+
+
+    public boolean isFirstrun() {
+        return prefs.getBoolean("firstrun", true);
+    }
+
+    public void setFirstrun(boolean firstrun) {
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putBoolean("firstrun", firstrun);
     }
 }

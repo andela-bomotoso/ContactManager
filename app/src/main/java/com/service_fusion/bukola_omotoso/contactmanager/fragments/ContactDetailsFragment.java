@@ -25,6 +25,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.service_fusion.bukola_omotoso.contactmanager.R;
@@ -34,11 +35,11 @@ import com.service_fusion.bukola_omotoso.contactmanager.data.DatabaseDescription
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ContactDetailsFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>{
+public class ContactDetailsFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
-    private  static final  int CONTACT_LOADER = 0;
+    private static final int CONTACT_LOADER = 0;
     private static Uri contactUri;
-    private  static ContactDetailsFragmentListener contactDetailsFragmentListener;
+    private static ContactDetailsFragmentListener contactDetailsFragmentListener;
 
     private TextView nameTextView;
     private TextView phoneTextView;
@@ -54,17 +55,18 @@ public class ContactDetailsFragment extends Fragment implements LoaderManager.Lo
 
     public interface ContactDetailsFragmentListener {
         void onContactDeleted();
+
         void onEditContact(Uri contactUri);
     }
 
     @Override
-    public void onAttach(Context context)   {
+    public void onAttach(Context context) {
         super.onAttach(context);
         contactDetailsFragmentListener = (ContactDetailsFragmentListener) context;
     }
 
     @Override
-    public   void onDetach()    {
+    public void onDetach() {
         super.onDetach();
         contactDetailsFragmentListener = null;
     }
@@ -79,16 +81,16 @@ public class ContactDetailsFragment extends Fragment implements LoaderManager.Lo
 
         Bundle arguments = getArguments();
 
-        if(arguments !=null)
+        if (arguments != null)
             contactUri = arguments.getParcelable(MainActivity.CONTACT_URI);
         View view = inflater.inflate(R.layout.fragment_contact_details, container, false);
 
-        coordinatorLayout = (CoordinatorLayout)getActivity().findViewById(R.id.fragmentContainer);
-        nameTextView = (TextView)view.findViewById(R.id.nameTextView);
-        phoneTextView = (TextView)view.findViewById(R.id.phoneTextView);
-        birthdayTextView = (TextView)view.findViewById(R.id.birthdayTextView);
-        addressTextView = (TextView)view.findViewById(R.id.addressTextView);
-        zipTextView = (TextView)view.findViewById(R.id.zipTextView);
+        coordinatorLayout = (CoordinatorLayout) getActivity().findViewById(R.id.fragmentContainer);
+        nameTextView = (TextView) view.findViewById(R.id.nameTextView);
+        phoneTextView = (TextView) view.findViewById(R.id.phoneTextView);
+        birthdayTextView = (TextView) view.findViewById(R.id.birthdayTextView);
+        addressTextView = (TextView) view.findViewById(R.id.addressTextView);
+        zipTextView = (TextView) view.findViewById(R.id.zipTextView);
 
         getLoaderManager().initLoader(CONTACT_LOADER, null, this);
 
@@ -96,14 +98,14 @@ public class ContactDetailsFragment extends Fragment implements LoaderManager.Lo
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater menuInflater)   {
+    public void onCreateOptionsMenu(Menu menu, MenuInflater menuInflater) {
         super.onCreateOptionsMenu(menu, menuInflater);
         menuInflater.inflate(R.menu.menu_details, menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId())   {
+        switch (item.getItemId()) {
             case R.id.action_edit:
                 contactDetailsFragmentListener.onEditContact(contactUri);
                 return true;
@@ -114,9 +116,9 @@ public class ContactDetailsFragment extends Fragment implements LoaderManager.Lo
         return super.onOptionsItemSelected(item);
     }
 
-    private void deleteContact()    {
+    private void deleteContact() {
         DialogFragment dialogFragment = DeleteDialogFragment.newInstance(R.string.confirm_title);
-        dialogFragment.show(getFragmentManager(),"deleteDialog");
+        dialogFragment.show(getFragmentManager(), "deleteDialog");
     }
 
     @Override
@@ -136,14 +138,14 @@ public class ContactDetailsFragment extends Fragment implements LoaderManager.Lo
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-        if(data != null && data.moveToFirst())  {
+        if (data != null && data.moveToFirst()) {
             int fNameIndex = data.getColumnIndex(DatabaseDescription.Contact.COLUMN_FIRSTNAME);
             int lNameIndex = data.getColumnIndex(DatabaseDescription.Contact.COLUMN_LASTNAME);
             int phoneIndex = data.getColumnIndex(DatabaseDescription.Contact.COLUMN_PHONE);
             int birthdayIndex = data.getColumnIndex(DatabaseDescription.Contact.COLUMN_BIRTHDAY);
             int addressIndex = data.getColumnIndex(DatabaseDescription.Contact.COLUMN_ADDRESS);
             int zipIndex = data.getColumnIndex(DatabaseDescription.Contact.COLUMN_ZIP);
-            nameTextView.setText(data.getString(fNameIndex)+" "+data.getString(lNameIndex));
+            nameTextView.setText(data.getString(fNameIndex) + " " + data.getString(lNameIndex));
             phoneTextView.setText(data.getString(phoneIndex));
             birthdayTextView.setText(data.getString(birthdayIndex));
             addressTextView.setText(data.getString(addressIndex));
@@ -157,10 +159,10 @@ public class ContactDetailsFragment extends Fragment implements LoaderManager.Lo
     }
 
     public static class DeleteDialogFragment extends DialogFragment {
-        public static DeleteDialogFragment newInstance(int title)   {
+        public static DeleteDialogFragment newInstance(int title) {
             DeleteDialogFragment deleteDialogFragment = new DeleteDialogFragment();
             Bundle args = new Bundle();
-            args.putInt("title",title);
+            args.putInt("title", title);
             deleteDialogFragment.setArguments(args);
             return deleteDialogFragment;
         }
@@ -174,9 +176,9 @@ public class ContactDetailsFragment extends Fragment implements LoaderManager.Lo
             builder.setPositiveButton(R.string.button_delete, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
-                    getActivity().getContentResolver().delete(contactUri, null,null);
+                    getActivity().getContentResolver().delete(contactUri, null, null);
                     contactDetailsFragmentListener.onContactDeleted();
-                    Snackbar.make(coordinatorLayout, R.string.contact_deleted,Snackbar.LENGTH_LONG).show();
+                    Snackbar.make(coordinatorLayout, R.string.contact_deleted, Snackbar.LENGTH_LONG).show();
                 }
             });
             builder.setNegativeButton(R.string.button_cancel, null);

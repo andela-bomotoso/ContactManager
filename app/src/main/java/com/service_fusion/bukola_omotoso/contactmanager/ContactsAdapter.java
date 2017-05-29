@@ -17,16 +17,16 @@ import org.w3c.dom.Text;
  * Created by bukola_omotoso on 24/05/2017.
  */
 
-public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHolder>{
+public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHolder> {
     private final ContactClickListener clickListener;
     private Cursor cursor = null;
 
-    public ContactsAdapter(ContactClickListener clickListener)  {
+    public ContactsAdapter(ContactClickListener clickListener) {
         this.clickListener = clickListener;
     }
 
-    public interface ContactClickListener   {
-        void onClick(Uri contactUri );
+    public interface ContactClickListener {
+        void onClick(Uri contactUri);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -45,7 +45,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
             });
         }
 
-        public void setRowID(long rowID)    {
+        public void setRowID(long rowID) {
             this.rowID = rowID;
         }
     }
@@ -62,7 +62,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
         cursor.moveToPosition(position);
         Log.d("cursor", cursor.toString());
         holder.setRowID(cursor.getLong(cursor.getColumnIndex(DatabaseDescription.Contact._ID)));
-        holder.textView.setText(cursor.getString(cursor.getColumnIndex(DatabaseDescription.Contact.COLUMN_FIRSTNAME))+" " + cursor.getString(cursor.getColumnIndex(DatabaseDescription.Contact.COLUMN_LASTNAME)));
+        holder.textView.setText(cursor.getString(cursor.getColumnIndex(DatabaseDescription.Contact.COLUMN_FIRSTNAME)) + " " + cursor.getString(cursor.getColumnIndex(DatabaseDescription.Contact.COLUMN_LASTNAME)));
     }
 
     @Override
@@ -70,7 +70,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
         return (cursor != null) ? cursor.getCount() : 0;
     }
 
-    public void swapCursor(Cursor cursor)   {
+    public void swapCursor(Cursor cursor) {
         this.cursor = cursor;
         notifyDataSetChanged();
     }

@@ -25,7 +25,7 @@ import com.service_fusion.bukola_omotoso.contactmanager.data.DatabaseDescription
 /**
  * A placeholder fragment containing a simple view.
  */
-public class ContactFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>{
+public class ContactFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private static final int CONTACTS_LOADER = 0;
     private ContactFragmentListener contactFragmentListener;
@@ -34,14 +34,15 @@ public class ContactFragment extends Fragment implements LoaderManager.LoaderCal
     public ContactFragment() {
     }
 
-    public interface ContactFragmentListener   {
+    public interface ContactFragmentListener {
         void onContactSelected(Uri contactUri);
+
         void onContactAdded();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
+                             Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         setHasOptionsMenu(true);
 
@@ -59,7 +60,7 @@ public class ContactFragment extends Fragment implements LoaderManager.LoaderCal
         recyclerView.setAdapter(contactsAdapter);
         recyclerView.setHasFixedSize(true);
 
-        FloatingActionButton actionButton = (FloatingActionButton)view.findViewById(R.id.fab);
+        FloatingActionButton actionButton = (FloatingActionButton) view.findViewById(R.id.fab);
         actionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -71,19 +72,19 @@ public class ContactFragment extends Fragment implements LoaderManager.LoaderCal
     }
 
     @Override
-    public void onAttach(Context context)   {
+    public void onAttach(Context context) {
         super.onAttach(context);
         contactFragmentListener = (ContactFragmentListener) context;
     }
 
     @Override
-    public void onDetach()  {
+    public void onDetach() {
         super.onDetach();
         contactFragmentListener = null;
     }
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState)    {
+    public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         getLoaderManager().initLoader(CONTACTS_LOADER, null, this);
     }
