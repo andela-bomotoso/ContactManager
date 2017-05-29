@@ -24,7 +24,7 @@
     <string name="contact_not_added">Contact Added</string>
     <string name="contact_not_updated">Contact Updated</string>
     <string name="invalid_contact">Invalid contact, please specify name</string>
+    <string name="first_run_message">Press the + button to add a new contact</string>
+    <string name="preference_file_key">com.service_fusion.bukola_omotoso.contactmanager.PREFERENCE_FILE_KEY</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
