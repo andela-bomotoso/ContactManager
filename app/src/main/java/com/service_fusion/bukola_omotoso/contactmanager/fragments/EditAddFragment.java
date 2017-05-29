@@ -1,4 +1,4 @@
-package com.example.bukola_omotoso.contactmanager.fragments;
+package com.service_fusion.bukola_omotoso.contactmanager.fragments;
 
 
 import android.app.DatePickerDialog;
@@ -28,15 +28,12 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
-import com.example.bukola_omotoso.contactmanager.MainActivity;
-import com.example.bukola_omotoso.contactmanager.R;
-import com.example.bukola_omotoso.contactmanager.data.DatabaseDescription;
+import com.service_fusion.bukola_omotoso.contactmanager.MainActivity;
+import com.service_fusion.bukola_omotoso.contactmanager.R;
+import com.service_fusion.bukola_omotoso.contactmanager.data.DatabaseDescription;
 
 import java.text.SimpleDateFormat;
 import java.util.Locale;
-
-import static android.R.attr.startYear;
-
 
 /**
  * A simple {@link Fragment} subclass.

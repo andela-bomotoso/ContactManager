@@ -1,4 +1,4 @@
-package com.example.bukola_omotoso.contactmanager.data;
+package com.service_fusion.bukola_omotoso.contactmanager.data;
 
 import android.content.ContentUris;
 import android.net.Uri;

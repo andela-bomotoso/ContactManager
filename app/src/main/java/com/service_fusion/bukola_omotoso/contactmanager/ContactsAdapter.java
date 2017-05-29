@@ -1,4 +1,4 @@
-package com.example.bukola_omotoso.contactmanager;
+package com.service_fusion.bukola_omotoso.contactmanager;
 
 import android.database.Cursor;
 import android.net.Uri;
@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.bukola_omotoso.contactmanager.data.DatabaseDescription;
+import com.service_fusion.bukola_omotoso.contactmanager.data.DatabaseDescription;
 
 import org.w3c.dom.Text;
 

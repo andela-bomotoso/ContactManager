@@ -1,4 +1,4 @@
-package com.example.bukola_omotoso.contactmanager.data;
+package com.service_fusion.bukola_omotoso.contactmanager.data;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -19,14 +19,14 @@ public class ContactDatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         final String CREATE_CONTACTS_TABLE =
-                "CREATE TABLE "+ DatabaseDescription.Contact.TABLE_NAME+ "("+
-                        DatabaseDescription.Contact._ID + " integer primary key, " +
-                        DatabaseDescription.Contact.COLUMN_FIRSTNAME + " TEXT, " +
-                        DatabaseDescription.Contact.COLUMN_LASTNAME + " TEXT, "+
-                        DatabaseDescription.Contact.COLUMN_PHONE + " TEXT, "+
-                        DatabaseDescription.Contact.COLUMN_BIRTHDAY+ " TEXT, "+
-                        DatabaseDescription.Contact.COLUMN_ADDRESS+" TEXT, "+
-                        DatabaseDescription.Contact.COLUMN_ZIP + " TEXT);";
+                "CREATE TABLE "+ com.service_fusion.bukola_omotoso.contactmanager.data.DatabaseDescription.Contact.TABLE_NAME+ "("+
+                        com.service_fusion.bukola_omotoso.contactmanager.data.DatabaseDescription.Contact._ID + " integer primary key, " +
+                        com.service_fusion.bukola_omotoso.contactmanager.data.DatabaseDescription.Contact.COLUMN_FIRSTNAME + " TEXT, " +
+                        com.service_fusion.bukola_omotoso.contactmanager.data.DatabaseDescription.Contact.COLUMN_LASTNAME + " TEXT, "+
+                        com.service_fusion.bukola_omotoso.contactmanager.data.DatabaseDescription.Contact.COLUMN_PHONE + " TEXT, "+
+                        com.service_fusion.bukola_omotoso.contactmanager.data.DatabaseDescription.Contact.COLUMN_BIRTHDAY+ " TEXT, "+
+                        com.service_fusion.bukola_omotoso.contactmanager.data.DatabaseDescription.Contact.COLUMN_ADDRESS+" TEXT, "+
+                        com.service_fusion.bukola_omotoso.contactmanager.data.DatabaseDescription.Contact.COLUMN_ZIP + " TEXT);";
                 sqLiteDatabase.execSQL(CREATE_CONTACTS_TABLE);
     }
 

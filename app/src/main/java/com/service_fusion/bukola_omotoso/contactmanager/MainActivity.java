@@ -1,4 +1,4 @@
-package com.example.bukola_omotoso.contactmanager;
+package com.service_fusion.bukola_omotoso.contactmanager;
 
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -7,9 +7,10 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
-import com.example.bukola_omotoso.contactmanager.fragments.ContactDetailsFragment;
-import com.example.bukola_omotoso.contactmanager.fragments.ContactFragment;
-import com.example.bukola_omotoso.contactmanager.fragments.EditAddFragment;
+import com.service_fusion.bukola_omotoso.contactmanager.R;
+import com.service_fusion.bukola_omotoso.contactmanager.fragments.ContactDetailsFragment;
+import com.service_fusion.bukola_omotoso.contactmanager.fragments.ContactFragment;
+import com.service_fusion.bukola_omotoso.contactmanager.fragments.EditAddFragment;
 
 public class MainActivity extends AppCompatActivity implements ContactFragment.ContactFragmentListener,EditAddFragment.EditAddFragmentListener, ContactDetailsFragment.ContactDetailsFragmentListener{
     public static final String CONTACT_URI = "contact_uri";

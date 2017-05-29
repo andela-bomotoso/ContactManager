@@ -1,4 +1,4 @@
-package com.example.bukola_omotoso.contactmanager.data;
+package com.service_fusion.bukola_omotoso.contactmanager.data;
 
 import android.content.ContentProvider;
 import android.content.ContentValues;
@@ -7,7 +7,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 
-import com.example.bukola_omotoso.contactmanager.R;
+import com.service_fusion.bukola_omotoso.contactmanager.R;
+import com.service_fusion.bukola_omotoso.contactmanager.data.ContactDatabaseHelper;
 
 public class ContactContentProvider extends ContentProvider {
 
@@ -18,9 +19,9 @@ public class ContactContentProvider extends ContentProvider {
     private static final int CONTACTS = 2;
 
     static {
-        uriMatcher.addURI(DatabaseDescription.AUTHORITY, DatabaseDescription.Contact.TABLE_NAME + "/#", ONE_CONTACT);
+        uriMatcher.addURI(com.service_fusion.bukola_omotoso.contactmanager.data.DatabaseDescription.AUTHORITY, com.service_fusion.bukola_omotoso.contactmanager.data.DatabaseDescription.Contact.TABLE_NAME + "/#", ONE_CONTACT);
 
-        uriMatcher.addURI(DatabaseDescription.AUTHORITY, DatabaseDescription.Contact.TABLE_NAME, CONTACTS);
+        uriMatcher.addURI(com.service_fusion.bukola_omotoso.contactmanager.data.DatabaseDescription.AUTHORITY, com.service_fusion.bukola_omotoso.contactmanager.data.DatabaseDescription.Contact.TABLE_NAME, CONTACTS);
     }
 
     public ContactContentProvider() {
@@ -33,7 +34,7 @@ public class ContactContentProvider extends ContentProvider {
             case ONE_CONTACT:
                 String id = uri.getLastPathSegment();
                 numberOfRowsDeleted = contactDatabaseHelper.getWritableDatabase().delete(
-                        DatabaseDescription.Contact.TABLE_NAME, DatabaseDescription.Contact._ID+"="+id, selectionArgs);
+                        com.service_fusion.bukola_omotoso.contactmanager.data.DatabaseDescription.Contact.TABLE_NAME, com.service_fusion.bukola_omotoso.contactmanager.data.DatabaseDescription.Contact._ID+"="+id, selectionArgs);
                 break;
             default:
                 throw new UnsupportedOperationException(getContext().getString(R.string.invalid_delete_uri) + uri);
@@ -59,10 +60,10 @@ public class ContactContentProvider extends ContentProvider {
         switch (uriMatcher.match(uri))  {
             case  CONTACTS:
             long rowId = contactDatabaseHelper.getWritableDatabase().insert(
-                    DatabaseDescription.Contact.TABLE_NAME, null, values);
+                    com.service_fusion.bukola_omotoso.contactmanager.data.DatabaseDescription.Contact.TABLE_NAME, null, values);
 
                 if(rowId > 0)   {
-                    newContactUri = DatabaseDescription.Contact.buildContactUri(rowId);
+                    newContactUri = com.service_fusion.bukola_omotoso.contactmanager.data.DatabaseDescription.Contact.buildContactUri(rowId);
                     getContext().getContentResolver().notifyChange(uri, null);
                 }   else    {
                     throw new UnsupportedOperationException(getContext().getString(
@@ -89,11 +90,11 @@ public class ContactContentProvider extends ContentProvider {
                         String[] selectionArgs, String sortOrder) {
         // TODO: Implement this to handle query requests from clients.
         SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
-        queryBuilder.setTables(DatabaseDescription.Contact.TABLE_NAME);
+        queryBuilder.setTables(com.service_fusion.bukola_omotoso.contactmanager.data.DatabaseDescription.Contact.TABLE_NAME);
 
         switch (uriMatcher.match(uri))  {
             case ONE_CONTACT:
-                queryBuilder.appendWhere(DatabaseDescription.Contact._ID+"="
+                queryBuilder.appendWhere(com.service_fusion.bukola_omotoso.contactmanager.data.DatabaseDescription.Contact._ID+"="
                 +uri.getLastPathSegment());
                 break;
             case CONTACTS:
@@ -116,7 +117,7 @@ public class ContactContentProvider extends ContentProvider {
             case ONE_CONTACT:
                 String id =  uri.getLastPathSegment();
                 numberOfRowsUpdated = contactDatabaseHelper.getWritableDatabase().update(
-                        DatabaseDescription.Contact.TABLE_NAME, values, DatabaseDescription.Contact._ID+"=" + id, selectionArgs);
+                        com.service_fusion.bukola_omotoso.contactmanager.data.DatabaseDescription.Contact.TABLE_NAME, values, com.service_fusion.bukola_omotoso.contactmanager.data.DatabaseDescription.Contact._ID+"=" + id, selectionArgs);
                 break;
             default:
                 throw new UnsupportedOperationException(getContext().getString(R.string.invalid_update_uri)+uri);

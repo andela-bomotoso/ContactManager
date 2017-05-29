@@ -1,4 +1,4 @@
-package com.example.bukola_omotoso.contactmanager.fragments;
+package com.service_fusion.bukola_omotoso.contactmanager.fragments;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -18,9 +18,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.bukola_omotoso.contactmanager.ContactsAdapter;
-import com.example.bukola_omotoso.contactmanager.R;
-import com.example.bukola_omotoso.contactmanager.data.DatabaseDescription;
+import com.service_fusion.bukola_omotoso.contactmanager.R;
+import com.service_fusion.bukola_omotoso.contactmanager.ContactsAdapter;
+import com.service_fusion.bukola_omotoso.contactmanager.data.DatabaseDescription;
 
 /**
  * A placeholder fragment containing a simple view.
