@@ -3,9 +3,7 @@ package com.service_fusion.bukola_omotoso.contactmanager.fragments;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
@@ -18,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.service_fusion.bukola_omotoso.contactmanager.ItemDivider;
 import com.service_fusion.bukola_omotoso.contactmanager.R;
 import com.service_fusion.bukola_omotoso.contactmanager.ContactsAdapter;
 import com.service_fusion.bukola_omotoso.contactmanager.data.DatabaseDescription;
@@ -50,6 +49,7 @@ public class ContactFragment extends Fragment implements LoaderManager.LoaderCal
         RecyclerView recyclerView;
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getBaseContext()));
+        recyclerView.addItemDecoration(new ItemDivider(getContext()));
         contactsAdapter = new ContactsAdapter(new ContactsAdapter.ContactClickListener() {
             @Override
             public void onClick(Uri contactUri) {
