@@ -1,5 +1,6 @@
 package com.example.bukola_omotoso.contactmanager;
 
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
@@ -14,15 +15,18 @@ public class MainActivity extends AppCompatActivity implements ContactFragment.C
     public static final String CONTACT_URI = "contact_uri";
     private ContactFragment contactFragment;
 
+    private SharedPreferences sharedPreferences = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-            contactFragment = new ContactFragment();
 
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        //sharedPreferences = getSharedPreferences("")
+        contactFragment = new ContactFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.add(R.id.fragmentContainer, contactFragment);
             transaction.commit();
     }
