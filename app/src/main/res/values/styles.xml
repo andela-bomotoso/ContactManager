@@ -21,8 +21,22 @@
 
     <style name="ContactTextView">
         <item name="android:layout_gravity">fill_horizontal</item>
-        <item name="android:textSize">16sp</item>
-        <item name="android:layout_margin">@dimen/activity_vertical_margin</item>
+        <item name="android:textColor">@color/gray</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="descriptionTextView">
+        <item name="android:layout_gravity">fill_horizontal</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@android:color/darker_gray</item>
+        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:layout_marginBottom">8dp</item>
+    </style>
+
+    <style name="divider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="background">@android:color/darker_gray</item>
     </style>
 
 </resources>
