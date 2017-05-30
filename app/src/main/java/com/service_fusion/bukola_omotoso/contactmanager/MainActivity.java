@@ -1,12 +1,11 @@
 package com.service_fusion.bukola_omotoso.contactmanager;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -16,7 +15,7 @@ import com.service_fusion.bukola_omotoso.contactmanager.fragments.ContactDetails
 import com.service_fusion.bukola_omotoso.contactmanager.fragments.ContactFragment;
 import com.service_fusion.bukola_omotoso.contactmanager.fragments.EditAddFragment;
 
-public class MainActivity extends AppCompatActivity implements ContactFragment.ContactFragmentListener, EditAddFragment.EditAddFragmentListener, ContactDetailsFragment.ContactDetailsFragmentListener {
+public class MainActivity extends AppCompatActivity implements FragmentManager.OnBackStackChangedListener, ContactFragment.ContactFragmentListener, EditAddFragment.EditAddFragmentListener, ContactDetailsFragment.ContactDetailsFragmentListener {
     public static final String CONTACT_URI = "contact_uri";
     private ContactFragment contactFragment;
     private CoordinatorLayout coordinatorLayout;
@@ -39,15 +38,39 @@ public class MainActivity extends AppCompatActivity implements ContactFragment.C
         if (isFirstrun()) {
             Snackbar.make(coordinatorLayout, R.string.first_run_message, Snackbar.LENGTH_LONG).show();
             setFirstrun(false);
-        }
 
+            getSupportFragmentManager().addOnBackStackChangedListener(this);
+            shouldDisplayHomeUp();
+        }
     }
+
 
     @Override
     protected void onResume() {
         super.onResume();
         Log.d("Resume Entered", "RESUME MSG");
     }
+
+    @Override
+    public void onBackStackChanged() {
+        shouldDisplayHomeUp();
+    }
+
+    public void shouldDisplayHomeUp() {
+        //Enable Up button only  if there are entries in the back stack
+        boolean hasFragment = getSupportFragmentManager().getBackStackEntryCount() > 0;
+        getSupportActionBar().setDisplayHomeAsUpEnabled(hasFragment);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_back_black_24dp);
+
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        //This method is called when the up button is pressed. Just the pop back stack.
+        getSupportFragmentManager().popBackStack();
+        return true;
+    }
+
 
     @Override
     public void onEditAddCompleted(Uri contactUri) {
